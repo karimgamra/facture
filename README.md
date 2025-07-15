@@ -11,8 +11,6 @@ The API manages a `payments` table with the following attributes:
 - `encaisse_payment` - Received payment amount
 - `en_attente` - Pending payment amount
 - `payment_en_retard` - Late payment amount
-- `created_at` - Creation timestamp
-- `updated_at` - Last update timestamp
 
 ## Setup Instructions
 

@@ -5,7 +5,7 @@ const db = require('../config/database');
 // GET all payments
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await db.execute('SELECT * FROM payments ORDER BY created_at DESC');
+        const [rows] = await db.execute('SELECT * FROM payments ORDER BY id DESC');
         res.json({
             success: true,
             data: rows
@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 // GET payments by user ID
 router.get('/user/:userId', async (req, res) => {
     try {
-        const [rows] = await db.execute('SELECT * FROM payments WHERE id_user = ? ORDER BY created_at DESC', [req.params.userId]);
+        const [rows] = await db.execute('SELECT * FROM payments WHERE id_user = ? ORDER BY id DESC', [req.params.userId]);
         
         res.json({
             success: true,
@@ -117,7 +117,7 @@ router.put('/:id', async (req, res) => {
         
         // Update payment
         const [result] = await db.execute(
-            'UPDATE payments SET chiffre_affaires = ?, encaisse_payment = ?, en_attente = ?, payment_en_retard = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+            'UPDATE payments SET chiffre_affaires = ?, encaisse_payment = ?, en_attente = ?, payment_en_retard = ? WHERE id = ?',
             [chiffre_affaires, encaisse_payment, en_attente, payment_en_retard, paymentId]
         );
         
@@ -173,7 +173,6 @@ router.patch('/:id', async (req, res) => {
             });
         }
         
-        updateFields.push('updated_at = CURRENT_TIMESTAMP');
         updateValues.push(paymentId);
         
         const query = `UPDATE payments SET ${updateFields.join(', ')} WHERE id = ?`;

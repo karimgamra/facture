@@ -6,11 +6,8 @@ CREATE TABLE IF NOT EXISTS payments (
     encaisse_payment DECIMAL(10, 2) DEFAULT 0.00 COMMENT 'Received payment amount',
     en_attente DECIMAL(10, 2) DEFAULT 0.00 COMMENT 'Pending payment amount',
     payment_en_retard DECIMAL(10, 2) DEFAULT 0.00 COMMENT 'Late payment amount',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
-    INDEX idx_user (id_user),
-    INDEX idx_created_at (created_at)
+    INDEX idx_user (id_user)
 );
 
 -- Sample data for testing
